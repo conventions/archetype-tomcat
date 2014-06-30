@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:framework="http://java.sun.com/jsf/composite/components/conventions"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    template="../templates/main.xhtml"
+    >
+    <ui:define name="content">
+        <h:panelGrid columns="2" cellpadding="30px">
+            <p:button id="btListUser" value="#{msg['user.find']}" outcome="/user/listUser.faces" style="font-size: 16px!important;"/>
+            <p:button id="btNewUser" value="#{msg['user.new']}" outcome="/user/addUser.faces" style="font-size: 16px!important;"/>
+        </h:panelGrid>
+    </ui:define>
+</ui:composition>

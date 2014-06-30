@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+        xmlns:framework="http://java.sun.com/jsf/composite/components/conventions"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="../templates/main.xhtml"
+        >
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{userMBean.currentUserId}" converter="javax.faces.Long"/>
+        </f:metadata>
+        <f:event type="preRenderView" listener="#{userMBean.initAddUserPage}"/>
+        <center>
+            <p:defaultCommand target="mainForm:bt-save:bt-save"/>
+            <p:panel id="panelAdd" style="width: 450px;min-height:200px "
+                     header="#{userMBean.insertState ?  msg.create :  msg.edit } #{msg.user}">
+                <h:panelGrid columns="3">
+
+                    <framework:label value="#{msg['logon.username']}" requiredStyle="true"/>
+                    <framework:inputText value="#{userMBean.entity.name}" required="true" renderMessage="true"
+                                         requiredMessage="#{msg['logon.usernameRequired']}"/>
+                    <h:column/>
+                    <framework:label value="#{msg['logon.password']}" requiredStyle="true"/>
+                    <framework:inputSecret value="#{userMBean.pass}" required="true" renderMessage="true"
+                                           requiredMessage="#{msg['logon.passwordRequired']}"/>
+                    <p:commandLink rendered="#{not userMBean.entity.transient}" value="#{msg['user.changePass']}"
+                                   immediate="true" process="@this" update=":changePassForm"
+                                   oncomplete="PF('changePass').show();">
+                        <f:setPropertyActionListener value="#{null}" target="#{userMBean.pass}"/>
+                        <f:setPropertyActionListener value="#{null}" target="#{userMBean.newPass}"/>
+                    </p:commandLink>
+                </h:panelGrid>
+                <h:panelGrid columns="3" cellpadding="5px">
+                    <framework:saveButton id="bt-save" actionName="saveUser" mbean="#{userMBean}" process=":mainForm:panelAdd"
+                                          styleClass="ui-priority-primary" ajax="true"
+                                          update=":mainForm:pageControl #{g}" value="#{msg.save}">
+                                          <f:param name="includeViewParams" value="true"/>
+                            </framework:saveButton>
+                    <framework:resetButton mbean="#{userMBean}" update=":mainForm:panelAdd"/>
+                    <framework:backButton update=":mainForm:pageControl" value="#{msg['back']}"/>
+                </h:panelGrid>
+                <center>
+                    <p:commandButton id="btManageGroup" ajax="false" value="#{msg['user.manageGroup']}"
+                                     action="#{userMBean.manageGroups}"
+                            />
+                </center>
+            </p:panel>
+        </center>
+    </ui:define>
+
+
+    <ui:define name="popup">
+        <p:dialog widgetVar="changePass" modal="true" header="#{msg['user.changePass.header']}">
+            <h:form id="changePassForm">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid columns="2">
+                    <p:outputLabel for="oldPass" value="#{msg['user.oldPass']}"/>
+                    <p:inputText value="#{userMBean.pass}" id="oldPass" required="true"
+                                 requiredMessage="#{msg['user.oldPassRequired']}"/>
+                    <p:outputLabel for="newPass" value="#{msg['user.newPass']}"/>
+                    <p:inputText value="#{userMBean.newPass}" id="newPass" required="true"
+                                 requiredMessage="#{msg['user.newPassRequired']}"/>
+                </h:panelGrid>
+                <center>
+                    <p:commandButton value="#{msg['user.changePass']}" action="#{userMBean.changePassword}"
+                                     oncomplete="if(!args.validationFailed){PF('changePass').hide()}"/>
+                </center>
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>

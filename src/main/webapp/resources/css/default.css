@@ -1,0 +1,19 @@
+/* 
+    Document   : arc
+    Created on : Jul 21, 2012, 5:36:56 PM
+    Author     : VAIO
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.ui-widget {
+    font-size: 12px !important;
+}
+
+.ui-menuitem{
+    margin-left: 4px!important;
+}
+.ui-datalist-content{
+    border: none;
+    background-image: none;
+}

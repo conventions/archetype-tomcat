@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:framework="http://java.sun.com/jsf/composite/components/conventions"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <center>
+         
+        <p:panel id="panelRoles"  style="width: 500px;min-height:200px ">
+            <f:facet name="header">
+                #{msg.groupRoles}
+            </f:facet>
+            <h:panelGrid columns="2">
+                <p:commandButton value="#{msg.save}" action="#{groupMBean.save}"  process=":mainForm:panelRoles" ajax="true" styleClass="ui-priority-primary"
+                                           update=":mainForm:pageControl #{g}"/>
+                <framework:backButton update=":mainForm:pageControl" value="#{msg['back']}" />
+            </h:panelGrid>
+            <p:dataTable value="#{groupMBean.entity.roles}" widgetVar="roleTableVar" id="roleTable" var="row" emptyMessage="#{msg['role.notAssociated']}" 
+                                 rows="5" paginatorPosition="bottom" 
+                                 rowIndexVar="rowIndex" 
+                                 rowStyleClass="#{empty rowIndex or rowIndex mod 2 ne 0 ? 'even-row' : ''}"
+                                 paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {JumpToPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" >
+                <f:facet name="header">
+                    <center>
+                        <p:commandButton value="#{msg['group.associateRole']}" update=":findRoleDlg:findRoleDlg_panel" action="#{groupMBean.preLoadDialog}"
+                                             oncomplete="PF('findRoleDlg').show()"/>
+                          
+                    </center>
+                        
+                </f:facet>
+            
+                <p:column headerText="#{msg.role}" sortBy="#{row.name}" filterBy="#{row.name}">
+                    #{row.name}
+                </p:column>
+                
+                  <p:column style="width: 40px">
+                            <f:facet name="header">
+                                Remove
+                            </f:facet>
+                        <div align="center">
+                            <framework:removeLink mbean="#{groupMBean}" row="#{row}" target="roleSelected" modal="removeRoleModal"/>
+                        </div>
+                   </p:column>
+            </p:dataTable>
+        </p:panel>
+    </center>
+            <framework:modalRemoval mbean="#{groupMBean}"
+                                        update=":mainForm:panelRoles #{g}"
+                                        oncomplete="PF('removeRoleModal').hide();"
+                                        renderMessages="false"
+                                        widgetVar="removeRoleModal">
+                    <p:inputText value="#{groupMBean.roleSelected.name}" disabled="true"/>
+                </framework:modalRemoval>
+    
+   
+</ui:composition>

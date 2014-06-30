@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:framework="http://java.sun.com/jsf/composite/components/conventions"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    template="templates/main.xhtml"
+    >
+
+    <ui:define name="content">
+        <framework:securityPage rolesAllowed="admin"/>
+        <h:form>
+          <h:panelGroup layout="block" id="smokeBlock"
+          <h:panelGrid columns="3" >
+              <h:outputLabel value="database"/>
+              <p:commandButton action="#{smokeMBean.testBd}" value="test" process="@form" update="@(span[id$=smokeBlock])"/>
+              <h:outputText value="#{smokeMBean.dbStatus}"/>
+          </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>

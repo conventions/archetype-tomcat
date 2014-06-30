@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:framework="http://java.sun.com/jsf/composite/components/conventions"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="../templates/main.xhtml"
+        >
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{userMBean.currentUserId}" converter="javax.faces.Long"/>
+        </f:metadata>
+        <f:event type="preRenderView" listener="#{userMBean.initManageGroupsPage}"/>
+        <center>
+            <p:panel id="panelGroups"
+                     style="width: 700px;min-height:200px ">
+                <f:facet name="header">
+                    #{msg.userGroups} #{userMBean.entity.name}
+                </f:facet>
+                <h:panelGrid columns="2">
+                    <p:commandButton id="btSave" value="#{msg.save}" action="#{userMBean.saveUser}"
+                                     ajax="true" process=":mainForm:panelGroups"
+                                     update=":mainForm:pageControl #{g}" styleClass="ui-priority-primary"/>
+                    <framework:backButton id="btBack" update=":mainForm:pageControl" value="#{msg['back']}"/>
+                </h:panelGrid>
+
+                <center>
+                    <p:commandButton id="btManageGroup" value="#{msg['user.associateGroup']}"
+                                     update=":findGroupDlg:findGroupDlg_panel"
+                                     action="#{userMBean.preLoadDialog}"
+                                     oncomplete="PF('findGroupDlg').show()"/>
+
+                </center>
+                <framework:datatable id="groupTable" paginator="#{userMBean.groupPaginator}" widgetVar="groupTableVar"
+                                     emptyMessage="#{msg['group.notAssociated']}">
+
+                    <p:column headerText="#{msg.group}" sortBy="#{row.name}" filterBy="#{row.name}">
+                        #{row.name}
+                    </p:column>
+                    <p:column sortBy="#{row.rolesAsList}" filterOptions="#{comboMBean.roleList}" filterBy="#{row.roles}"
+                              headerText="#{msg.roles}">
+                        <p:dataList value="#{row.rolesAsList}" var="r" rendered="#{not empty row.roles}">
+                            <p:column>
+                                #{r.name}
+                            </p:column>
+                        </p:dataList>
+                        <h:outputText rendered="#{empty row.roles}" value="#{msg['role.notAssociated']}"/>
+                    </p:column>
+                    <p:column style="width: 40px">
+                        <f:facet name="header">
+                            Remove
+                        </f:facet>
+
+                        <div align="center">
+                            <framework:removeLink mbean="#{userMBean}" row="#{row}" target="groupSelected"
+                                                  modal="removeGroupModal"/>
+                        </div>
+                    </p:column>
+                    <f:facet name="footer">
+                        <framework:tableFooter value="#{userMBean.groupPaginator.dataModel.rowCount}" id="footer"/>
+                    </f:facet>
+                </framework:datatable>
+                </p:panel>
+        </center>
+        <framework:modalRemoval mbean="#{userMBean}"
+                                update=":mainForm:pageControl #{g}"
+                                timeout="0"
+                                removeAction="removeGroup"
+                                renderMessages="false"
+                                widgetVar="removeGroupModal">
+            <p:inputText value="#{userMBean.groupSelected.name}" disabled="true"/>
+        </framework:modalRemoval>
+
+    </ui:define>
+
+    <ui:define name="popup">
+        <ui:include src="popup/groupDialog.xhtml"/>
+    </ui:define>
+</ui:composition>

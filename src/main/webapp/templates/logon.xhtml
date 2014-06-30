@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:dialog id="logonDialog" visible="#{not loggedIn}" header="#{msg['logon.header']}" modal="true"
+              closable="false">
+        <h:form id="loginForm">
+            <p:focus for="loginForm"/>
+            <p:messages id="loginMessages"/>
+            <h:panelGrid columns="2">
+                <p:outputLabel for="inptUser" value="#{msg['logon.username']}"/>
+                <p:inputText id="inptUser" value="#{security.user.name}" style="cursor: pointer"
+                             required="true" requiredMessage="#{msg['logon.usernameRequired']}"/>
+                <p:outputLabel for="inptPass" value="#{msg['logon.password']}"/>
+                <p:password id="inptPass" value="#{security.user.password}" style="cursor: pointer"
+                            required="true" requiredMessage="#{msg['logon.passwordRequired']}"/>
+            </h:panelGrid>
+            <center>
+                <p:commandButton id="btLogon" value="Login" action="#{security.doLogon}"
+                                 update=":logonDialog loginMessages" ajax="false" styleClass="ui-priority-primary">
+                    <f:param name="includeViewParams" value="true"/>
+                </p:commandButton>
+            </center>
+        </h:form>
+    </p:dialog>
+</ui:composition>
