@@ -4,6 +4,7 @@
  */
 package org.conventions.archetype.db;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
@@ -18,16 +19,15 @@ import org.conventionsframework.producer.DefaultEntityManagerProducer;
  *
  * @author rmpestano
  */
-@RequestScoped
+@ApplicationScoped
 @Specializes
 public class EntityManagerProducer extends DefaultEntityManagerProducer  {
 
-	private EntityManager entityManager;
+	private EntityManagerFactory emf;
 	
 	 
 	public  EntityManagerProducer(){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("archetypePU");
-		entityManager = emf.createEntityManager();
+	      emf = Persistence.createEntityManagerFactory("archetypePU");
 		
 	}
 
@@ -38,7 +38,7 @@ public class EntityManagerProducer extends DefaultEntityManagerProducer  {
 	@Produces
 	@RequestScoped
 	public EntityManager getEntityManager() {
-		return entityManager;
+		return emf.createEntityManager();
 	}
 
    

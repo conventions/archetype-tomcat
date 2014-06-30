@@ -33,6 +33,7 @@
         <param-name>STACK_SIZE</param-name>
         <param-value>6</param-value>
     </context-param>
+    
     <context-param>
         <param-name>INITIAL_PAGE</param-name>
         <param-value>home.faces</param-value>

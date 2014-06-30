@@ -58,8 +58,13 @@
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>el-api</artifactId>
-			<scope>compile</scope>
+			<version>2.2</version>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>jstl</groupId> -->
+		<!-- <artifactId>jstl</artifactId> -->
+		<!-- <version>1.2</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-atinject_1.0_spec</artifactId>
@@ -89,11 +94,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.5.Final</version>
+			<version>4.1.4.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.1.4.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -125,54 +131,20 @@
 		<!-- end WELD -->
 
 
-		<!-- OWB 
-		<dependency>
-			<groupId>org.apache.openwebbeans</groupId>
-			<artifactId>openwebbeans-impl</artifactId>
-			<version>${webbeans.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.openwebbeans</groupId>
-			<artifactId>openwebbeans-jsf</artifactId>
-			<version>${webbeans.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.openwebbeans</groupId>
-			<artifactId>openwebbeans-resource</artifactId>
-			<version>${webbeans.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.openwebbeans</groupId>
-			<artifactId>openwebbeans-spi</artifactId>
-			<version>${webbeans.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.openwebbeans</groupId>
-			<artifactId>openwebbeans-web</artifactId>
-			<version>${webbeans.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.openwebbeans</groupId>
-			<artifactId>openwebbeans-tomcat7</artifactId>
-			<version>${webbeans.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.openwebbeans</groupId>
-			<artifactId>openwebbeans-el22</artifactId>
-			<version>${webbeans.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-asm5-shaded</artifactId>
-			<version>3.17</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-finder-shaded</artifactId>
-			<version>3.17</version>
-		</dependency>
-		 end OWB -->
+		<!-- OWB <dependency> <groupId>org.apache.openwebbeans</groupId> <artifactId>openwebbeans-impl</artifactId> 
+			<version>${webbeans.version}</version> </dependency> <dependency> <groupId>org.apache.openwebbeans</groupId> 
+			<artifactId>openwebbeans-jsf</artifactId> <version>${webbeans.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.openwebbeans</groupId> <artifactId>openwebbeans-resource</artifactId> 
+			<version>${webbeans.version}</version> </dependency> <dependency> <groupId>org.apache.openwebbeans</groupId> 
+			<artifactId>openwebbeans-spi</artifactId> <version>${webbeans.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.openwebbeans</groupId> <artifactId>openwebbeans-web</artifactId> 
+			<version>${webbeans.version}</version> </dependency> <dependency> <groupId>org.apache.openwebbeans</groupId> 
+			<artifactId>openwebbeans-tomcat7</artifactId> <version>${webbeans.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.openwebbeans</groupId> <artifactId>openwebbeans-el22</artifactId> 
+			<version>${webbeans.version}</version> </dependency> <dependency> <groupId>org.apache.xbean</groupId> 
+			<artifactId>xbean-asm5-shaded</artifactId> <version>3.17</version> </dependency> 
+			<dependency> <groupId>org.apache.xbean</groupId> <artifactId>xbean-finder-shaded</artifactId> 
+			<version>3.17</version> </dependency> end OWB -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
