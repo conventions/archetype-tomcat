@@ -232,18 +232,18 @@
 	<repositories>
 		<repository>
 			<id>arquillian jbehave UNofficial maven repo</id>
-			<url>http://arquillian-jbehave-repo.googlecode.com/git/</url>
+			<url>https://arquillian-jbehave-repo.googlecode.com/git/</url>
 			<layout>default</layout>
 		</repository>
 		<repository>
 			<id>Jboss AS dist UNofficial maven repo</id>
-			<url>http://jboss-as-dist.googlecode.com/git/</url>
+			<url>https://jboss-as-dist.googlecode.com/git/</url>
 			<layout>default</layout>
 		</repository>
 		<repository>
 			<id>prime-repo</id>
 			<name>Prime Technology Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
+			<url>https://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
 		<repository>
